@@ -51,6 +51,11 @@ const g = Function.constant();
 g(11, 0, 3); // Evaluates to undefined.
 ```
 
+| Precedent | Example
+| --------- | ---------
+|[lodash][] |`_.constant`
+|[stdlib][] |`import constantFunction from '@stdlib/utils-constant-function';`
+
 ## Function.identity
 The `Function.constant` static method always returns its first argument.
 
@@ -60,6 +65,11 @@ Function.identity(value);
 Function.identity(5); // Evaluates to 5.
 Function.identity(); // Evaluates to undefined.
 ```
+
+| Precedent | Example
+| --------- | ---------
+|[lodash][] |`_.identity`
+|[stdlib][] |`import identity from '@stdlib/utils-identity-function';`
 
 ## Function.pipe
 The `Function.pipe` static method applies a sequence
@@ -93,6 +103,10 @@ Each sub-function is expected to be a unary function.
 
 If `Function.pipe` receives only one argument, then it will return `input` by default.\
 If `Function.pipe` receives no arguments, then it will return `undefined`.
+
+| Precedent | Example
+| --------- | ---------
+|[RxJS][]   |`rx.pipe`
 
 ### What happened to the F# pipe operator?
 F#, Haskell, and other languages that are based on auto-curried unary functions
@@ -156,3 +170,9 @@ If `Function.pipeAsync` receives only one argument,
 then it will return `Promise.resolve(input)` by default.\
 If `Function.pipeAsync` receives no arguments,
 then it will return `Promise.resolve(undefined)`.
+
+[lodash]: https://lodash.com/docs/4.17.15
+[stdlib]: https://github.com/stdlib-js/stdlib
+[RxJS]: https://rxjs.dev
+
+[pipe history]:
