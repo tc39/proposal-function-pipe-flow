@@ -10,32 +10,36 @@ ECMAScript Stage-0 Proposal. J. S. Choi, 2021.
 There are several higher-order functions that are often used in functional programming.
 This proposal would add them to the `Function` global object as static methods.
 
-## Function.compose
-The `Function.compose` static method creates a new function from several sub-functions.
+## Function.flow
+The `Function.flow` static method creates a new function from several sub-functions.
 
 ```js
-Function.compose(...fns);
+Function.flow(...fns);
 
-const f = Function.compose(x => x + 1, x => x * 2, (x, y) => x + y);
+const f = Function.flow((x, y) => x + y, x => x * 2, x => x + 1);
 f(5, 7); // Evalutes to ((5 + 7) * 2) + 1.
 
-const g = Function.compose(x => x + 1);
+const g = Function.flow(x => x + 1);
 g(5); // Evaluates to 6.
 
-const h = Function.compose();
+const h = Function.flow();
 h(5); // Evalutes to 5.
 ```
 
-Any function created by `Function.compose`
-applies its own arguments to its rightmost sub-function.
-Then that result is applied to its preceding sub-function.
-In other words, function composition occurs from right to left.
+Any function created by `Function.flow`
+applies its own arguments to its leftmost sub-function.
+Then that result is applied to its next sub-function.
+In other words, function composition occurs from left to right.
 
-The rightmost sub-function may have any arity,
-but any preceding sub-functions are expected to be unary.
+The leftmost sub-function may have any arity,
+but any subsequent sub-functions are expected to be unary.
 
-If `Function.compose` receives no arguments, then, by default,
+If `Function.flow` receives no arguments, then, by default,
 it will return `Function.identity` (which is defined later in this proposal).
+
+| Precedent | Example
+| --------- | ---------
+|[lodash][] |`_.flow`
 
 ## Function.constant
 The `Function.constant` static method creates a new function from a constant value.
