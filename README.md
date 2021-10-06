@@ -149,25 +149,26 @@ The promise will resolve to the final sub-function’s result.
 ```js
 Function.pipeAsync(input, ...fns);
 
-// Resolves to ((await (await fetch(url, options)).json()) + 1) * 2.
-await Function.pipeAsync(url,
+// A promise that will resolve to ((await (await fetch(await url, options)).json()) + 1) * 2.
+Function.pipeAsync(url,
   x => fetch(x, options),
   x => x.json(),
   x => x + 1,
   x => x * 2,
 );
 
-// Resolves to 5.
-await Function.pipeAsync(5);
+// A promise that will resolve to 5.
+Function.pipeAsync(5);
 
-// Resolves to undefined.
-await Function.pipeAsync();
+// A promise that will resolve to undefined.
+Function.pipeAsync();
 
-// Rejects with a SyntaxError.
-await Function.pipeAsync('x', JSON.parse);
+// A promise that will reject with a SyntaxError.
+Function.pipeAsync('x', JSON.parse);
 ```
 
-The first sub-function is applied to `input` and then `await`ed,
+The input is first `await`ed.
+Then the first sub-function is applied to `input` and then `await`ed,
 then the second sub-function is applied to the first sub-function’s result then `await`ed,
 and so forth.
 In other words, function piping occurs from left to right.
