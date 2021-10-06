@@ -7,8 +7,28 @@ ECMAScript Stage-0 Proposal. J. S. Choi, 2021.
 
 [HISTORY.md]: https://github.com/js-choi/proposal-function-helpers/blob/main/HISTORY.md
 
-There are several higher-order functions that are often used in functional programming.
-This proposal would add them to the `Function` global object as static methods.
+This proposal would standardize some useful,
+common helper functions that get downloaded from NPM a lot.
+
+These convenience functions are simple,
+and they can be reimplemented easily in userspace. 
+So why standardize them? Because:
+
+1. These helper functions are commonly used and universally useful.
+   Each function is frequently downloaded from NPM,
+   despite their being easily reimplementable.
+   This is to be expected:
+   after all, every JavaScript developer needs to manipulate callbacks,
+   but they often do not wish to write the utilities themselves.
+2. Standardization would improve developer ergonomics.
+   If we find ourselves needing these functions in a REPL or script,
+   instead of having to download an external package
+   or pasting in a definition into our own code,
+   we can simply destructure the `Function` object.
+3. Standardization would improve code clarity.
+   There would be one standard name for each of these functions,
+   rather than various names from various libraries
+   that refer to the same thing.
 
 ## Function.flow
 The `Function.flow` static method creates a new function from several sub-functions.
