@@ -16,13 +16,15 @@ The `Function.flow` static method creates a new function from several sub-functi
 ```js
 Function.flow(...fns);
 
-const f = Function.flow((x, y) => x + y, x => x * 2, x => x + 1);
+const { flow } = Function;
+
+const f = flow((x, y) => x + y, x => x * 2, x => x + 1);
 f(5, 7); // Evalutes to ((5 + 7) * 2) + 1.
 
-const g = Function.flow(x => x + 1);
+const g = flow(x => x + 1);
 g(5); // Evaluates to 6.
 
-const h = Function.flow();
+const h = flow();
 h(5); // Evalutes to 5.
 ```
 
@@ -50,10 +52,12 @@ The new function will always return that value, no matter what arguments it is g
 ```js
 Function.constant(value);
 
-const f = Function.constant(5);
+const { constant } = Function;
+
+const f = constant(5);
 f(11, 0, 3); // Evaluates to 5.
 
-const g = Function.constant();
+const g = constant();
 g(11, 0, 3); // Evaluates to undefined.
 ```
 
@@ -70,8 +74,10 @@ The `Function.identity` static method always returns its first argument.
 ```js
 Function.identity(value);
 
-Function.identity(5); // Evaluates to 5.
-Function.identity(); // Evaluates to undefined.
+const { identity } = Function;
+
+identity(5); // Evaluates to 5.
+identity(); // Evaluates to undefined.
 ```
 
 | Precedent | Example
@@ -88,20 +94,22 @@ of sub-functions to a given input value, returning the final sub-function’s re
 ```js
 Function.pipe(input, ...fns);
 
+const { pipe } = Function;
+
 // Evalutes to (5 + 7) * 2.
-Function.pipe(5,
+pipe(5,
   x => x + 1,
   x => x * 2,
 );
 
 // Evaluates to 5.
-Function.pipe(5);
+pipe(5);
 
 // Evaluates to undefined.
-Function.pipe();
+pipe();
 
 // Throws a SyntaxError.
-await Function.pipeAsync('x', JSON.parse);
+pipe('x', JSON.parse);
 ```
 
 The first sub-function is applied to `input`,
@@ -149,8 +157,10 @@ The promise will resolve to the final sub-function’s result.
 ```js
 Function.pipeAsync(input, ...fns);
 
+const { pipeAsync } = Function;
+
 // A promise that will resolve to ((await (await fetch(await url, options)).json()) + 1) * 2.
-Function.pipeAsync(url,
+pipeAsync(url,
   x => fetch(x, options),
   x => x.json(),
   x => x + 1,
@@ -158,13 +168,13 @@ Function.pipeAsync(url,
 );
 
 // A promise that will resolve to 5.
-Function.pipeAsync(5);
+pipeAsync(5);
 
 // A promise that will resolve to undefined.
-Function.pipeAsync();
+pipeAsync();
 
 // A promise that will reject with a SyntaxError.
-Function.pipeAsync('x', JSON.parse);
+pipeAsync('x', JSON.parse);
 ```
 
 The input is first `await`ed.
