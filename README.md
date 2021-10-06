@@ -147,7 +147,13 @@ If `Function.pipe` receives no arguments, then it will return `undefined`.
 |[RxJS][]   |`rx.pipe`
 |[fp-ts][] |`import { pipe } from 'fp-ts/function';`
 
-### What happened to the F# pipe operator?
+***
+
+<details>
+<summary>What happened to the F# pipe operator?</summary>
+
+***
+
 F#, Haskell, and other languages that are based on auto-curried unary functions
 have a tacit-unary-function-application operator.
 The pipe champion group has presented F# pipes for Stage 2 twice to TC39,
@@ -157,17 +163,19 @@ memory performance concerns, syntax concerns about await,
 and concerns about encouraging ecosystem bifurcation/forking.
 (For more information, see the [pipe proposal’s HISTORY.md][pipe history].)
 
-Given this reality, TC39 is immensely more likely to pass
+Given this reality, TC39 is much more likely to pass
 a `Function.pipe` helper function than a similar syntactic operator.
 
 Standardizing a helper function does not preclude
 standardizing an equivalent operator later.
 For example, TC39 standardized binary `**` even when `Math.pow` existed.
 
-In the future, I might try to propose a F# pipe operator,
-but I would like to try proposing `Function.pipe` first,
+In the future, we might try to propose a F# pipe operator,
+but we would like to try proposing `Function.pipe` first,
 in an effort to bring its benefits to the wider JavaScript community
 as soon as possible.
+  
+</details>
 
 ## Function.pipeAsync
 The `Function.pipeAsync` static method applies a sequence
