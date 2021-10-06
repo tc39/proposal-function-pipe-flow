@@ -187,7 +187,8 @@ Function.pipeAsync(input, ...fns);
 
 const { pipeAsync } = Function;
 
-// A promise that will resolve to ((await (await fetch(await url, options)).json()) + 1) * 2.
+// A promise that will resolve to
+// ((await (await fetch(await url, options)).json()) + 1) * 2.
 pipeAsync(url,
   x => fetch(x, options),
   x => x.json(),
