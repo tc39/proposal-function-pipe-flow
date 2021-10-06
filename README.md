@@ -65,48 +65,6 @@ it will return `Function.identity` (which is defined later in this proposal).
 |[fp-ts][] |`import { flow } from 'fp-ts/function';`
 |[Ramda][] |`R.pipe`
 
-## Function.constant
-The `Function.constant` static method creates a new function from a constant value.
-The new function will always return that value, no matter what arguments it is given.
-
-```js
-Function.constant(value);
-
-const { constant } = Function;
-
-const f = constant(5);
-f(11, 0, 3); // Evaluates to 5.
-
-const g = constant();
-g(11, 0, 3); // Evaluates to undefined.
-```
-
-| Precedent | Example
-| --------- | ---------
-|[lodash][] |`_.constant`
-|[stdlib][] |`import constantFunction from '@stdlib/utils-constant-function';`
-|[fp-ts][] |`import { constant } from 'fp-ts/function';`
-|[Ramda][] |`R.always`
-
-## Function.identity
-The `Function.identity` static method always returns its first argument.
-
-```js
-Function.identity(value);
-
-const { identity } = Function;
-
-identity(5); // Evaluates to 5.
-identity(); // Evaluates to undefined.
-```
-
-| Precedent | Example
-| --------- | ---------
-|[lodash][] |`_.identity`
-|[stdlib][] |`import identity from '@stdlib/utils-identity-function';`
-|[fp-ts][] |`import { identity } from 'fp-ts/function';`
-|[Ramda][] |`R.identity`
-
 ## Function.pipe
 The `Function.pipe` static method applies a sequence
 of sub-functions to a given input value, returning the final sub-function’s result.
@@ -229,3 +187,45 @@ then it will return `Promise.resolve(undefined)`.
 [Ramda]: https://ramdajs.com/
 
 [pipe history]: https://github.com/tc39/proposal-pipeline-operator/blob/main/HISTORY.md
+
+## Function.constant
+The `Function.constant` static method creates a new function from a constant value.
+The new function will always return that value, no matter what arguments it is given.
+
+```js
+Function.constant(value);
+
+const { constant } = Function;
+
+const f = constant(5);
+f(11, 0, 3); // Evaluates to 5.
+
+const g = constant();
+g(11, 0, 3); // Evaluates to undefined.
+```
+
+| Precedent | Example
+| --------- | ---------
+|[lodash][] |`_.constant`
+|[stdlib][] |`import constantFunction from '@stdlib/utils-constant-function';`
+|[fp-ts][] |`import { constant } from 'fp-ts/function';`
+|[Ramda][] |`R.always`
+
+## Function.identity
+The `Function.identity` static method always returns its first argument.
+
+```js
+Function.identity(value);
+
+const { identity } = Function;
+
+identity(5); // Evaluates to 5.
+identity(); // Evaluates to undefined.
+```
+
+| Precedent | Example
+| --------- | ---------
+|[lodash][] |`_.identity`
+|[stdlib][] |`import identity from '@stdlib/utils-identity-function';`
+|[fp-ts][] |`import { identity } from 'fp-ts/function';`
+|[Ramda][] |`R.identity`
