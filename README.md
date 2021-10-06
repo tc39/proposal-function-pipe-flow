@@ -188,4 +188,4 @@ then it will return `Promise.resolve(undefined)`.
 [fp-ts]: https://gcanti.github.io/fp-ts/
 [Ramda]: https://ramdajs.com/
 
-[pipe history]:
+[pipe history]: https://github.com/tc39/proposal-pipeline-operator/blob/main/HISTORY.md
