@@ -40,6 +40,8 @@ it will return `Function.identity` (which is defined later in this proposal).
 | Precedent | Example
 | --------- | ---------
 |[lodash][] |`_.flow`
+|[fp-ts][] |`import { flow } from 'fp-ts/function';`
+|[Ramda][] |`R.pipe`
 
 ## Function.constant
 The `Function.constant` static method creates a new function from a constant value.
@@ -59,6 +61,8 @@ g(11, 0, 3); // Evaluates to undefined.
 | --------- | ---------
 |[lodash][] |`_.constant`
 |[stdlib][] |`import constantFunction from '@stdlib/utils-constant-function';`
+|[fp-ts][] |`import { constant } from 'fp-ts/function';`
+|[Ramda][] |`R.always`
 
 ## Function.identity
 The `Function.identity` static method always returns its first argument.
@@ -74,6 +78,8 @@ Function.identity(); // Evaluates to undefined.
 | --------- | ---------
 |[lodash][] |`_.identity`
 |[stdlib][] |`import identity from '@stdlib/utils-identity-function';`
+|[fp-ts][] |`import { identity } from 'fp-ts/function';`
+|[Ramda][] |`R.identity`
 
 ## Function.pipe
 The `Function.pipe` static method applies a sequence
@@ -111,6 +117,7 @@ If `Function.pipe` receives no arguments, then it will return `undefined`.
 | Precedent | Example
 | --------- | ---------
 |[RxJS][]   |`rx.pipe`
+|[fp-ts][] |`import { pipe } from 'fp-ts/function';`
 
 ### What happened to the F# pipe operator?
 F#, Haskell, and other languages that are based on auto-curried unary functions
@@ -178,5 +185,7 @@ then it will return `Promise.resolve(undefined)`.
 [lodash]: https://lodash.com/docs/4.17.15
 [stdlib]: https://github.com/stdlib-js/stdlib
 [RxJS]: https://rxjs.dev
+[fp-ts]: https://gcanti.github.io/fp-ts/
+[Ramda]: https://ramdajs.com/
 
 [pipe history]:
