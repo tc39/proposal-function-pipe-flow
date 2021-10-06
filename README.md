@@ -61,7 +61,7 @@ g(11, 0, 3); // Evaluates to undefined.
 |[stdlib][] |`import constantFunction from '@stdlib/utils-constant-function';`
 
 ## Function.identity
-The `Function.constant` static method always returns its first argument.
+The `Function.identity` static method always returns its first argument.
 
 ```js
 Function.identity(value);
