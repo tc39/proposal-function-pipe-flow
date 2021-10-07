@@ -11,7 +11,7 @@ This proposal would standardize some useful,
 common helper functions that get downloaded from NPM a lot.
 
 These convenience functions are simple,
-and they can be reimplemented easily in userspace. 
+and they can be reimplemented easily in userspace.
 So why standardize them? Because:
 
 1. These helper functions are commonly used and universally useful.
@@ -38,14 +38,14 @@ Function.flow(...fns);
 
 const { flow } = Function;
 
-const f = flow((x, y) => x + y, x => x * 2, x => x + 1);
-f(5, 7); // Evalutes to ((5 + 7) * 2) + 1.
+const f = flow(f0, f1, f2);
+f(5, 7); // f2(f1(f0(5, 7))).
 
-const g = flow(x => x + 1);
-g(5); // Evaluates to 6.
+const g = flow(g0);
+g(5, 7); // g0(5, 7).
 
 const h = flow();
-h(5); // Evalutes to 5.
+h(5, 7); // 5.
 ```
 
 Any function created by `Function.flow`
@@ -74,20 +74,14 @@ Function.pipe(input, ...fns);
 
 const { pipe } = Function;
 
-// Evalutes to (5 + 7) * 2.
-pipe(5,
-  x => x + 1,
-  x => x * 2,
-);
+// f2(f1(f0(5))).
+pipe(5, f0, f1, f2);
 
-// Evaluates to 5.
+// 5.
 pipe(5);
 
-// Evaluates to undefined.
+// undefined.
 pipe();
-
-// Throws a SyntaxError.
-pipe('x', JSON.parse);
 ```
 
 The first sub-function is applied to `input`,
@@ -132,7 +126,7 @@ In the future, we might try to propose a F# pipe operator,
 but we would like to try proposing `Function.pipe` first,
 in an effort to bring its benefits to the wider JavaScript community
 as soon as possible.
-  
+
 </details>
 
 ## Function.pipeAsync
@@ -145,23 +139,14 @@ Function.pipeAsync(input, ...fns);
 
 const { pipeAsync } = Function;
 
-// A promise that will resolve to
-// ((await (await fetch(await url, options)).json()) + 1) * 2.
-pipeAsync(url,
-  x => fetch(x, options),
-  x => x.json(),
-  x => x + 1,
-  x => x * 2,
-);
+// Promise.resolve(5).then(f0).then(f1).then(f2).
+pipeAsync(5, f0, f1, f2);
 
-// A promise that will resolve to 5.
+// Promise.resolve(5).
 pipeAsync(5);
 
-// A promise that will resolve to undefined.
+// Promise.resolve(undefined).
 pipeAsync();
-
-// A promise that will reject with a SyntaxError.
-pipeAsync('x', JSON.parse);
 ```
 
 The input is first `await`ed.
@@ -198,10 +183,10 @@ Function.constant(value);
 const { constant } = Function;
 
 const f = constant(5);
-f(11, 0, 3); // Evaluates to 5.
+f(11, 0, 3); // 5.
 
 const g = constant();
-g(11, 0, 3); // Evaluates to undefined.
+g(11, 0, 3); // undefined.
 ```
 
 | Precedent | Example
@@ -219,8 +204,8 @@ Function.identity(value);
 
 const { identity } = Function;
 
-identity(5); // Evaluates to 5.
-identity(); // Evaluates to undefined.
+identity(5); // 5.
+identity(); // undefined.
 ```
 
 | Precedent | Example
