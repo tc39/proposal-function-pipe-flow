@@ -192,6 +192,30 @@ f(11, 0, 3); // 5.
 
 const g = constant();
 g(11, 0, 3); // undefined.
+
+// From cypress@8.6.0/packages/net-stubbing/lib/server/util.ts
+setDefaultHeader('access-control-expose-headers', constant('*'))
+
+// From cypress@8.6.0/packages/driver/src/cypress/utils.ts
+return [fn, constant(type)]
+
+// From <https://github.com/odoo/odoo/blob/15.0/addons/pad/static/src/js/pad.js>
+url.toJSON = constant(this.url);
+
+// From <https://github.com/elastic/kibana/blob/v7.15.1/src/plugins/vis_type_vislib/public/fixtures/mock_data/histogram/_slices.js>
+{
+  name: 0,
+  size: 378611,
+  aggConfig: {
+    type: 'histogram',
+    schema: 'segment',
+    fieldFormatter: constant(String),
+    params: {
+      interval: 1000,
+      extended_bounds: {},
+    },
+  },
+},
 ```
 
 Precedents include:
