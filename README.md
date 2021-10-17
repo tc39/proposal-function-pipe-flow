@@ -59,11 +59,14 @@ but any subsequent sub-functions are expected to be unary.
 If `Function.flow` receives no arguments, then, by default,
 it will return `Function.identity` (which is defined later in this proposal).
 
-| Precedent | Example
-| --------- | ---------
-|[lodash][] |`_.flow`
-|[fp-ts][] |`import { flow } from 'fp-ts/function';`
-|[Ramda][] |`R.pipe`
+Precedents include:
+* [lodash][]: [lodash.flow][] is individually downloaded from NPM
+  about [600,000 times weekly][lodash.flow]
+* [fp-ts][]: `import { flow } from 'fp-ts/function';`
+* [Ramda][]: `import { pipe } from 'ramda/src/pipe';`
+* [RxJS][]: `import { pipe } from 'rxjs';`
+
+[lodash.flow]: https://www.npmjs.com/package/lodash.flow
 
 ## Function.pipe
 The `Function.pipe` static method applies a sequence
@@ -94,10 +97,8 @@ Each sub-function is expected to be a unary function.
 If `Function.pipe` receives only one argument, then it will return `input` by default.\
 If `Function.pipe` receives no arguments, then it will return `undefined`.
 
-| Precedent | Example
-| --------- | ---------
-|[RxJS][]   |`rx.pipe`
-|[fp-ts][] |`import { pipe } from 'fp-ts/function';`
+Precedents include:
+* [fp-ts][]: `import { pipe } from 'fp-ts/function';`
 
 ***
 
@@ -165,14 +166,6 @@ then it will return `Promise.resolve(input)` by default.\
 If `Function.pipeAsync` receives no arguments,
 then it will return `Promise.resolve(undefined)`.
 
-[lodash]: https://lodash.com/docs/4.17.15
-[stdlib]: https://github.com/stdlib-js/stdlib
-[RxJS]: https://rxjs.dev
-[fp-ts]: https://gcanti.github.io/fp-ts/
-[Ramda]: https://ramdajs.com/
-
-[pipe history]: https://github.com/tc39/proposal-pipeline-operator/blob/main/HISTORY.md
-
 ## Function.constant
 The `Function.constant` static method creates a new function from a constant value.
 The new function will always return that value, no matter what arguments it is given.
@@ -189,12 +182,14 @@ const g = constant();
 g(11, 0, 3); // undefined.
 ```
 
-| Precedent | Example
-| --------- | ---------
-|[lodash][] |`_.constant`
-|[stdlib][] |`import constantFunction from '@stdlib/utils-constant-function';`
-|[fp-ts][] |`import { constant } from 'fp-ts/function';`
-|[Ramda][] |`R.always`
+Precedents include:
+* [lodash][]: [lodash.constant][] is individually downloaded from NPM
+  about [81,000 times weekly][lodash.constant]
+* [stdlib][]: `import constantFunction from '@stdlib/utils-constant-function';`
+* [fp-ts][]: `import { constant } from 'fp-ts/function';`
+* [Ramda][]: `import { always } from 'ramda/src/always';`
+
+[lodash.constant]: https://www.npmjs.com/package/lodash.constant
 
 ## Function.identity
 The `Function.identity` static method always returns its first argument.
@@ -208,9 +203,19 @@ identity(5); // 5.
 identity(); // undefined.
 ```
 
-| Precedent | Example
-| --------- | ---------
-|[lodash][] |`_.identity`
-|[stdlib][] |`import identity from '@stdlib/utils-identity-function';`
-|[fp-ts][] |`import { identity } from 'fp-ts/function';`
-|[Ramda][] |`R.identity`
+Precedents include:
+* [lodash][]: [lodash.identity][] is individually downloaded from NPM
+  about [700,000 times weekly][lodash.identity]
+* [stdlib][]: `import identity from '@stdlib/utils-identity-function';`
+* [fp-ts][]: `import { identity } from 'fp-ts/function';`
+* [Ramda][]: `import { identity } from 'ramda/src/identity';`
+
+[lodash.identity]: https://www.npmjs.com/package/lodash.identity
+
+[lodash]: https://lodash.com/docs/4.17.15
+[stdlib]: https://github.com/stdlib-js/stdlib
+[RxJS]: https://rxjs.dev
+[fp-ts]: https://gcanti.github.io/fp-ts/
+[Ramda]: https://ramdajs.com/
+
+[pipe history]: https://github.com/tc39/proposal-pipeline-operator/blob/main/HISTORY.md
