@@ -88,6 +88,15 @@ pipe(5);
 
 // undefined.
 pipe();
+
+// From pico@1.0.1/source/inline.ts
+return pipe(
+  download(absoluteURL),
+  mapRej(downloadErrorToDetailedError),
+  chainFluture(responseToBlob),
+  chainFluture(blobToDataURL),
+  mapFluture(dataURL => `url(${dataURL})`)
+)
 ```
 
 The first sub-function is applied to `input`,
