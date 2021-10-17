@@ -244,6 +244,31 @@ const { identity } = Function;
 
 identity(5); // 5.
 identity(); // undefined.
+
+// From cypress@8.6.0/packages/driver/src/cypress/runner.ts
+// “iterates over a suite's tests (including nested suites)
+// and will return as soon as the callback is true”
+const findTestInSuite = (suite, fn = identity) => {
+  for (const test of suite.tests) {
+    if (fn(test)) {
+      return test
+    }
+  }
+}
+
+// From gatsby@3.14.3/packages/gatsby-plugin-sharp/src/plugin-options.js
+// “get all non falsey values”
+return _.pickBy(options, identity)
+
+// From gatsby@3.14.3/packages/gatsby-plugin-gatsby-cloud/src/constants.js
+export const DEFAULT_OPTIONS = {
+  // “optional transform for manipulating headers for sorting, etc”
+  transformHeaders: identity,
+}
+
+// From ghost@4.19.0/core/frontend/helpers/img_url.js
+// “CASE: only make paths relative if we didn't get a request for an absolute url”
+const maybeEnsureRelativePath = !absoluteUrlRequested ? ensureRelativePath : _.identity;
 ```
 
 Precedents include:
