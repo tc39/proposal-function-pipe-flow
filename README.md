@@ -202,6 +202,9 @@ return [fn, constant(type)]
 // From <https://github.com/odoo/odoo/blob/15.0/addons/pad/static/src/js/pad.js>
 url.toJSON = constant(this.url);
 
+// From ng-table@3.0.1/test/specs/settings.spec.ts
+_.mapValues(allSettings.filterOptions, constant(undefined)),
+
 // From <https://github.com/elastic/kibana/blob/v7.15.1/src/plugins/vis_type_vislib/public/fixtures/mock_data/histogram/_slices.js>
 {
   name: 0,
