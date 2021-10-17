@@ -47,8 +47,27 @@ g(5, 7); // g0(5, 7).
 const h = flow();
 h(5, 7); // 5.
 
-// From customize-cra@1.0.0/src/overrides.js
-export const override = (...plugins) => flow(...plugins.filter(f => f));
+// From gatsby@3.14.3/packages/gatsby-plugin-sharp/src/plugin-options.js
+flow(
+  mapUserLinkHeaders(pluginData),
+  applySecurityHeaders(pluginOptions),
+  applyCachingHeaders(pluginData, pluginOptions),
+  mapUserLinkAllPageHeaders(pluginData, pluginOptions),
+  applyLinkHeaders(pluginData, pluginOptions),
+  applyTransfromHeaders(pluginOptions),
+  saveHeaders(pluginData)
+)
+
+// From strapi@3.6.8/packages/strapi-admin/services/permission/permissions-manager/query-builers.js
+const transform = flow(flattenDeep, cleanupUnwantedProperties);
+
+// From semantic-ui-react@v2.0.4/docs/static/utils/getInfoForSeeTags.js
+const getInfoForSeeTags = flow(
+  _.get('docblock.tags'),
+  _.filter((tag) => tag.title === 'see'),
+  _.map((tag) => {
+  }),
+)
 ```
 
 Any function created by `Function.flow`
