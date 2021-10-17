@@ -46,6 +46,9 @@ g(5, 7); // g0(5, 7).
 
 const h = flow();
 h(5, 7); // 5.
+
+// From customize-cra@1.0.0/src/overrides.js
+export const override = (...plugins) => flow(...plugins.filter(f => f));
 ```
 
 Any function created by `Function.flow`
