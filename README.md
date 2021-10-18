@@ -299,6 +299,48 @@ Precedents include:
 
 [lodash.identity]: https://www.npmjs.com/package/lodash.identity
 
+## Function.tap
+The `Function.tap` static method creates a new unary function
+that applies some callback to its argument before returning the original argument.
+
+```js
+Function.tap(callback)(input);
+
+const { tap } = Function;
+
+tap(console.log)(5); // Prints 5 before returning 5.
+
+arr.map(tap(console.log)).map(f); // Prints each item from `arr` before passing them to `f`.
+
+const data = await Promise.resolve('intro.txt')
+  .then(Deno.open)
+  .then(Deno.readAll)
+  .then(tap(console.log))
+  .then(data => new TextDecoder('utf-8').decode(data));
+
+// From testdouble@3.16.2/src/constructor.js
+var fakeConstructorFromNames = (funcNames) => {
+  return _.tap(tdFunction('(unnamed constructor)'), (fakeConstructor) => {
+    _.each(funcNames, (funcName) => {
+      fakeConstructor.prototype[funcName] = tdFunction(`#${String(funcName)}`)
+    })
+  })
+}
+
+// From <https://github.com/rendrjs/rendr/blob/1.1.4/test/shared/fetcher.test.js>
+function getModelResponse(version, id, addJsonKey) {
+  if (addJsonKey) {
+    return _.tap({}, function(obj) {
+      obj.listing = resp;
+    });
+  }
+}
+```
+
+Precedents include:
+* [lodash][]: `_.tap`
+* [Ramda][]: `import { tap } from 'ramda/src/tap';`
+
 [lodash]: https://lodash.com/docs/4.17.15
 [stdlib]: https://github.com/stdlib-js/stdlib
 [RxJS]: https://rxjs.dev
