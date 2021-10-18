@@ -320,7 +320,7 @@ const data = await Promise.resolve('intro.txt')
 
 // From testdouble@3.16.2/src/constructor.js
 var fakeConstructorFromNames = (funcNames) => {
-  return _.tap(tdFunction('(unnamed constructor)'), (fakeConstructor) => {
+  return tap(tdFunction('(unnamed constructor)'), (fakeConstructor) => {
     _.each(funcNames, (funcName) => {
       fakeConstructor.prototype[funcName] = tdFunction(`#${String(funcName)}`)
     })
@@ -330,7 +330,7 @@ var fakeConstructorFromNames = (funcNames) => {
 // From <https://github.com/rendrjs/rendr/blob/1.1.4/test/shared/fetcher.test.js>
 function getModelResponse(version, id, addJsonKey) {
   if (addJsonKey) {
-    return _.tap({}, function(obj) {
+    return tap({}, function(obj) {
       obj.listing = resp;
     });
   }
