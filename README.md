@@ -31,7 +31,7 @@ So why standardize them? Because:
    that refer to the same thing.
 
 ## Function.flow
-The `Function.flow` static method creates a new function from several sub-functions.
+The `Function.flow` static method creates a new function by combining several callbacks.
 
 ```js
 Function.flow(...fns);
@@ -71,12 +71,12 @@ const getInfoForSeeTags = flow(
 ```
 
 Any function created by `Function.flow`
-applies its own arguments to its leftmost sub-function.
-Then that result is applied to its next sub-function.
+applies its own arguments to its leftmost callback.
+Then that result is applied to its next callback.
 In other words, function composition occurs from left to right.
 
-The leftmost sub-function may have any arity,
-but any subsequent sub-functions are expected to be unary.
+The leftmost callback may have any arity,
+but any subsequent callbacks are expected to be unary.
 
 If `Function.flow` receives no arguments, then, by default,
 it will return `Function.identity` (which is defined later in this proposal).
@@ -92,7 +92,7 @@ Precedents include:
 
 ## Function.flowAsync
 The `Function.flowAsync` static method creates a new function
-from several potentially async sub-functions;
+by combining several potentially async callbacks;
 the created function will always return a promise.
 
 ```js
@@ -114,19 +114,19 @@ await h(5, 7); // await 5.
 ```
 
 Any function created by `Function.flowAsync`
-applies its own arguments to its leftmost sub-function.
-Then that result is `await`ed before being applied to its next sub-function.
+applies its own arguments to its leftmost callback.
+Then that result is `await`ed before being applied to its next callback.
 In other words, async function composition occurs from left to right.
 
-The leftmost sub-function may have any arity,
-but any subsequent sub-functions are expected to be unary.
+The leftmost callback may have any arity,
+but any subsequent callbacks are expected to be unary.
 
 If `Function.flow` receives no arguments, then, by default,
 it will return `Promise.resolve`.
 
 ## Function.pipe
 The `Function.pipe` static method applies a sequence
-of sub-functions to a given input value, returning the final sub-function’s result.
+of callbacks to a given input value, returning the final callback’s result.
 
 ```js
 Function.pipe(input, ...fns);
@@ -152,12 +152,12 @@ return pipe(
 )
 ```
 
-The first sub-function is applied to `input`,
-then the second sub-function is applied to the first sub-function’s result,
+The first callback is applied to `input`,
+then the second callback is applied to the first callback’s result,
 and so forth.
 In other words, function piping occurs from left to right.
 
-Each sub-function is expected to be a unary function.
+Each callback is expected to be a unary function.
 
 If `Function.pipe` receives only one argument, then it will return `input` by default.\
 If `Function.pipe` receives no arguments, then it will return `undefined`.
@@ -197,8 +197,8 @@ as soon as possible.
 
 ## Function.pipeAsync
 The `Function.pipeAsync` static method applies a sequence
-of potentially async sub-functions to a given input value, returning a promise.
-The promise will resolve to the final sub-function’s result.
+of potentially async callbacks to a given input value, returning a promise.
+The promise will resolve to the final callback’s result.
 
 ```js
 Function.pipeAsync(input, ...fns);
@@ -216,14 +216,14 @@ pipeAsync();
 ```
 
 The input is first `await`ed.
-Then the first sub-function is applied to `input` and then `await`ed,
-then the second sub-function is applied to the first sub-function’s result then `await`ed,
+Then the first callback is applied to `input` and then `await`ed,
+then the second callback is applied to the first callback’s result then `await`ed,
 and so forth.
 In other words, function piping occurs from left to right.
 
-Each sub-function is expected to be a unary function.
+Each callback is expected to be a unary function.
 
-If any sub-function returns a promise that then rejects with an error,
+If any callback returns a promise that then rejects with an error,
 then the promise returned by `Function.pipeAsync` will reject with the same error.
 
 If `Function.pipeAsync` receives only one argument,
@@ -338,7 +338,7 @@ The `Function.tap` static method creates a new unary function
 that applies some callback to its argument before returning the original argument.
 
 ```js
-Function.tap(callback)(input);
+Function.tap(callback);
 
 const { tap } = Function;
 
