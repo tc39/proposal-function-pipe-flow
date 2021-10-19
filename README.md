@@ -90,6 +90,40 @@ Precedents include:
 
 [lodash.flow]: https://www.npmjs.com/package/lodash.flow
 
+## Function.flowAsync
+The `Function.flowAsync` static method creates a new function
+from several potentially async sub-functions;
+the created function will always return a promise.
+
+```js
+Function.flowAsync(...fns);
+
+const { flowAsync } = Function;
+
+// (...args) => Promise.resolve(x).then(f0).then(f1).then(f2).
+pipeAsync(f0, f1, f2);
+
+const f = flowAsync(f0, f1, f2);
+await f(5, 7); // await f2(await f1(await f0(5, 7))).
+
+const g = flowAsync(g0);
+await g(5, 7); // await g0(5, 7).
+
+const h = flow();
+await h(5, 7); // await 5.
+```
+
+Any function created by `Function.flowAsync`
+applies its own arguments to its leftmost sub-function.
+Then that result is `await`ed before being applied to its next sub-function.
+In other words, async function composition occurs from left to right.
+
+The leftmost sub-function may have any arity,
+but any subsequent sub-functions are expected to be unary.
+
+If `Function.flow` receives no arguments, then, by default,
+it will return `Promise.resolve`.
+
 ## Function.pipe
 The `Function.pipe` static method applies a sequence
 of sub-functions to a given input value, returning the final sub-function’s result.
