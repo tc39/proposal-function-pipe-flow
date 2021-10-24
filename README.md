@@ -101,7 +101,7 @@ Function.flowAsync(...fns);
 const { flowAsync } = Function;
 
 // (...args) => Promise.resolve(x).then(f0).then(f1).then(f2).
-pipeAsync(f0, f1, f2);
+flowAsync(f0, f1, f2);
 
 const f = flowAsync(f0, f1, f2);
 await f(5, 7); // await f2(await f1(await f0(5, 7))).
@@ -109,7 +109,7 @@ await f(5, 7); // await f2(await f1(await f0(5, 7))).
 const g = flowAsync(g0);
 await g(5, 7); // await g0(5, 7).
 
-const h = flow();
+const h = flowAsync();
 await h(5, 7); // await 5.
 ```
 
@@ -121,7 +121,7 @@ In other words, async function composition occurs from left to right.
 The leftmost callback may have any arity,
 but any subsequent callbacks are expected to be unary.
 
-If `Function.flow` receives no arguments, then, by default,
+If `Function.flowAsync` receives no arguments, then, by default,
 it will return `Promise.resolve`.
 
 ## Function.pipe
