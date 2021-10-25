@@ -388,8 +388,6 @@ Precedents include:
 
 [lodash.identity]: https://www.npmjs.com/package/lodash.identity
 
-## Function.tap
-The `Function.tap` static method creates a new unary function
 ## Function.noop
 
 The `Function.noop` static method always returns undefined.
@@ -558,39 +556,47 @@ Precedents include:
 
 [lodash.throttle]: https://www.npmjs.com/package/lodash.debounce
 
+## Function.prototype.aside
+The `Function.prototype.aside` method creates a new unary function
 that applies some callback to its argument before returning the original argument.
 
 ```js
-Function.tap(callback);
+fn.aside();
 
-const { tap } = Function;
+const { aside } = Function;
 
-tap(console.log)(5); // Prints 5 before returning 5.
+console.log.aside(5); // Prints 5 before returning 5.
 
-arr.map(tap(console.log)).map(f); // Prints each item from `arr` before passing them to `f`.
+arr.map(console.log.aside).map(f);
+// Prints each item from `arr` before passing them to `f`.
 
 const data = await Promise.resolve('intro.txt')
   .then(Deno.open)
   .then(Deno.readAll)
-  .then(tap(console.log))
+  .then(console.log.aside())
   .then(data => new TextDecoder('utf-8').decode(data));
+```
 
-// From testdouble@3.16.2/src/constructor.js
-var fakeConstructorFromNames = (funcNames) => {
-  return tap(tdFunction('(unnamed constructor)'), (fakeConstructor) => {
-    _.each(funcNames, (funcName) => {
-      fakeConstructor.prototype[funcName] = tdFunction(`#${String(funcName)}`)
-    })
-  })
-}
+The following real-world example originally used [lodash][].aside and lodash/fp’s pipe.
 
-// From <https://github.com/rendrjs/rendr/blob/1.1.4/test/shared/fetcher.test.js>
-function getModelResponse(version, id, addJsonKey) {
-  if (addJsonKey) {
-    return tap({}, function(obj) {
-      obj.listing = resp;
-    });
-  }
+```js
+// From IBM/report-toolkit v0.6.1 packages/common/src/config.js
+export function filterEnabledRules(config) {
+  return pipe(
+    config,
+    _.getOr({}, 'rules'),
+    _.toPairs,
+    _.reduce(
+      (enabledRules, [ruleName, ruleConfig]) =>
+        (_.isObject(ruleConfig) && _.get('enabled', ruleConfig)) ||
+        (_.isBoolean(ruleConfig) && ruleConfig)
+          ? [ruleName, ...enabledRules]
+          : enabledRules,
+      []
+    ),
+    (ruleIds => {
+      debug('found %d enabled rule(s)', ruleIds.length);
+    }).aside();
 }
 ```
 
