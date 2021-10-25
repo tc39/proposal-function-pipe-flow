@@ -61,7 +61,11 @@ g(5, 7); // g0(5, 7).
 
 const h = flow();
 h(5, 7); // 5.
+```
 
+The following real-world examples originally used [lodash.flow][].
+
+```js
 // From gatsby@3.14.3/packages/gatsby-plugin-sharp/src/plugin-options.js
 flow(
   mapUserLinkHeaders(pluginData),
@@ -73,7 +77,8 @@ flow(
   saveHeaders(pluginData)
 )
 
-// From strapi@3.6.8/packages/strapi-admin/services/permission/permissions-manager/query-builers.js
+// From strapi@3.6.8
+// packages/strapi-admin/services/permission/permissions-manager/query-builers.js
 const transform = flow(flattenDeep, cleanupUnwantedProperties);
 
 // From semantic-ui-react@v2.0.4/docs/static/utils/getInfoForSeeTags.js
@@ -139,6 +144,9 @@ but any subsequent callbacks are expected to be unary.
 If `Function.flowAsync` receives no arguments, then, by default,
 it will return `Promise.resolve`.
 
+The name “flow” comes from lodash.flow.
+(The name compose would be confusing with other languages’ RTL function composition.)
+
 ## Function.pipe
 The `Function.pipe` static method applies a sequence
 of callbacks to a given input value, returning the final callback’s result.
@@ -156,8 +164,12 @@ pipe(5);
 
 // undefined.
 pipe();
+```
 
-// From pico@1.0.1/source/inline.ts
+The following real-world examples originally used [fp-ts][]’s `pipe` function.
+
+```js
+// From @gripeless/pico@1.0.1/source/inline.ts
 return pipe(
   download(absoluteURL),
   mapRej(downloadErrorToDetailedError),
@@ -165,6 +177,14 @@ return pipe(
   chainFluture(blobToDataURL),
   mapFluture(dataURL => `url(${dataURL})`)
 )
+
+// From StoplightIO Prism v4.5.0 packages/http/src/validator/validators/body.ts
+return pipe(
+  specs,
+  A.findFirst(spec => !!typeIs(mediaType, [spec.mediaType])),
+  O.alt(() => A.head(specs)),
+  O.map(content => ({ mediaType, content }))
+);
 ```
 
 The first callback is applied to `input`,
@@ -260,14 +280,18 @@ f(11, 0, 3); // 5.
 
 const g = constant();
 g(11, 0, 3); // undefined.
+```
 
+The following real-world examples originally used [lodash.constant][].
+
+```js
 // From cypress@8.6.0/packages/net-stubbing/lib/server/util.ts
 setDefaultHeader('access-control-expose-headers', constant('*'))
 
 // From cypress@8.6.0/packages/driver/src/cypress/utils.ts
 return [fn, constant(type)]
 
-// From <https://github.com/odoo/odoo/blob/15.0/addons/pad/static/src/js/pad.js>
+// From Odoo v15.0 addons/pad/static/src/js/pad.js
 url.toJSON = constant(this.url);
 
 // From ng-table@3.0.1/test/specs/settings.spec.ts
@@ -277,7 +301,8 @@ const newSettings: = {
   groupOptions: _.mapValues(allSettings.groupOptions, constant(undefined))
 };
 
-// From <https://github.com/elastic/kibana/blob/v7.15.1>
+// From Elastic Kibana v7.15.1
+// src/plugins/vis_types/vislib/public/fixtures/mock_data/histogram/_slices.js
 {
   name: 0,
   size: 378611,
@@ -287,10 +312,14 @@ const newSettings: = {
     fieldFormatter: constant(String),
     params: {
       interval: 1000,
-      extended_bounds: {},
+      extended_bounds: { /* … */ },
     },
   },
+  /* … */
 },
+
+// From Yhat Rodeo v2.5.2 src/node/services/files.test.js
+fs.lstat.onCall(0).yields(null, {isDirectory: constant(true)});
 ```
 
 Precedents include:
@@ -312,7 +341,11 @@ const { identity } = Function;
 
 identity(5); // 5.
 identity(); // undefined.
+```
 
+The following real-world examples originally used [lodash.identity][].
+
+```js
 // From cypress@8.6.0/packages/driver/src/cypress/runner.ts
 // “iterates over a suite's tests (including nested suites)
 // and will return as soon as the callback is true”
@@ -320,7 +353,7 @@ const findTestInSuite = (suite, fn = identity) => {
   for (const test of suite.tests) {
     if (fn(test)) {
       return test
-    }
+    } /* … */
   }
 }
 
@@ -332,11 +365,18 @@ return _.pickBy(options, identity)
 export const DEFAULT_OPTIONS = {
   // “optional transform for manipulating headers for sorting, etc”
   transformHeaders: identity,
+  /* … */
 }
 
 // From ghost@4.19.0/core/frontend/helpers/img_url.js
 // “CASE: only make paths relative if we didn't get a request for an absolute url”
 const maybeEnsureRelativePath = !absoluteUrlRequested ? ensureRelativePath : _.identity;
+
+// From Meteor v2.5.0 tools/cordova/builder.js
+const boilerplate = new Boilerplate(CORDOVA_ARCH, manifest, {
+  urlMapper: identity,
+  /* … */
+});
 ```
 
 Precedents include:
