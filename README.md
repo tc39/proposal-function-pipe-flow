@@ -462,6 +462,56 @@ Precedents include:
 [`$.noop`]: https://www.npmjs.com/package/lodash.noop
 [lodash.noop]: https://www.npmjs.com/package/lodash.noop
 
+## Function.prototype.once
+The `Function.prototype.once` method creates a new function
+that calls the original function at most once,
+no matter how much the new function is called.
+```js
+fn.once();
+
+const fn = console.log.once();
+fn(5); // Prints 5.
+fn(5); // Does not print anything.
+fn(5); // Does not print anything.
+
+const initialize = createApplication.once();
+initialize();
+initialize();
+// createApplication is invoked only once.
+```
+
+The following real-world example originally used [lodash.once][].
+
+```js
+// From Meteor v2.2.1.
+// “Are we running Meteor from a git checkout?”
+export const inCheckout = (function () {
+  try { /* … */ } catch (e) { console.log(e); }
+  return false;
+}).once();
+
+// From cypress@8.6.0.
+cy.on('command:retry', _.after(2, (() => {
+  button.remove() /* … */
+}).once()))
+
+// From Jitsi Meet v6482.
+this._hangup = (() => {
+ sendAnalytics(createToolbarEvent('hangup'));
+ /* … */
+}).once()
+```
+
+Precedents include:
+* [lodash][]: [lodash.once][] is individually downloaded from NPM
+  about [8,900,000 times weekly][lodash.once]
+* [jQuery][]: [`.one`][]
+* Node: [`eventEmitter.once`][]
+
+[lodash.once]: https://www.npmjs.com/package/lodash.once
+[`.one`]: https://api.jquery.com/one/
+[`eventEmitter.once`]: https://nodejs.org/api/events.html#handling-events-only-once
+
 that applies some callback to its argument before returning the original argument.
 
 ```js
