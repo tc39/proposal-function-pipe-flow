@@ -512,6 +512,52 @@ Precedents include:
 [`.one`]: https://api.jquery.com/one/
 [`eventEmitter.once`]: https://nodejs.org/api/events.html#handling-events-only-once
 
+## Function.prototype.debounce
+The `Function.prototype.debounce` method creates a new function
+that calls the original function at most once,
+no matter how much the new function is called.
+```js
+fn.debounce(numOfMilliseconds);
+```
+
+Numerous graphical applications use `debounce`.
+In this example, logging happens on keyup events from `inputEl`,
+but only after the user has stopped typing for at least 250 ms:
+```js
+inputEl.addEventListener('keyup',
+  console.log.debounce(250));
+```
+
+This method may come with options that could be bikeshedded in Stage 1.
+
+Precedents include:
+* [lodash][]: [lodash.debounce][] is individually downloaded from NPM
+  about [11,400,000 times weekly][lodash.debounce]
+
+[lodash.debounce]: https://www.npmjs.com/package/lodash.debounce
+
+## Function.prototype.throttle
+The `Function.prototype.throttle` method creates a new function that, when called,
+calls the original function—but only at most once within a given length of time.
+```js
+fn.throttle(numOfMilliseconds);
+```
+
+Numerous graphical applications use `throttle`.
+In this example, logging happens on window scroll, but no more than once every 250 ms:
+```js
+inputEl.addEventListener('keyup',
+  console.log.throttle(250));
+```
+
+This method may come with options that could be bikeshedded in Stage 1.
+
+Precedents include:
+* [lodash][]: [lodash.throttle][] is individually downloaded from NPM
+  about [3,700,000 times weekly][lodash.throttle]
+
+[lodash.throttle]: https://www.npmjs.com/package/lodash.debounce
+
 that applies some callback to its argument before returning the original argument.
 
 ```js
