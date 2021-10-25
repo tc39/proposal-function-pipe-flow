@@ -604,11 +604,62 @@ Precedents include:
 * [lodash][]: `_.tap`
 * [Ramda][]: `import { tap } from 'ramda/src/tap';`
 
+## Function.prototype.unThis
+
+The `Function.prototype.unThis` method creates a new function
+that calls the original function, supplying its first argument
+as the original function’s `this` receiver,
+and supplying the rest of its arguments as the original function’s ordinary arguments.
+
+This is useful for converting functions
+that rely on the dynamic this binding into functions
+that only use their arguments.
+
+```js
+fn.unThis();
+
+const $slice = Array.prototype.slice.unThis();
+$slice([ 0, 1, 2 ], 1); // [ 1, 2 ]
+```
+
+This is not a substitute for a bind-this syntax,
+which allows developers to change the receiver of functions
+without creating a wrapper function.
+
+`fn.unThis()` is equivalent to
+`Function.prototype.bind.bind(Function.prototype.call)(fn)`.
+
+Therefore, `fn.unThis()(thisArg, ...restArgs)` is equivalent
+to `fn.call(thisArg, ...restArgs)`.
+
+The following real-world example originally used [call-bind][]
+or a manually created similar function.
+
+```js
+// From chrome-devtools-frontend@1.0.934332
+// node_modules/array-includes/test/implementation.js
+runTests(implementation.unThis(), t);
+
+// From string.prototype.trimstart@1.0.4/index.js
+var bound = getPolyfill().unThis();
+
+// andreasgal/dom.js (84b7ab6) src/snapshot.js
+const /* … */
+  join = A.join || Array.prototype.join.unThis(),
+  map = A.map || Array.prototype.map.unThis(),
+  push = A.push || Array.prototype.push.unThis(),
+  /* … */;
+```
+
+Precedents include:
+* [call-bind][]: `callBind`
+
 [lodash]: https://lodash.com/docs/4.17.15
 [stdlib]: https://github.com/stdlib-js/stdlib
 [RxJS]: https://rxjs.dev
 [fp-ts]: https://gcanti.github.io/fp-ts/
 [Ramda]: https://ramdajs.com/
 [jQuery]: https://jquery.com/
+[call-bind]: https://www.npmjs.com/package/call-bind
 
 [pipe history]: https://github.com/tc39/proposal-pipeline-operator/blob/main/HISTORY.md
