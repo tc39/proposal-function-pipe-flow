@@ -7,8 +7,15 @@ ECMAScript Stage-0 Proposal. J. S. Choi, 2021.
 
 [HISTORY.md]: https://github.com/js-choi/proposal-function-helpers/blob/main/HISTORY.md
 
-This proposal would standardize some useful,
-common helper functions that get downloaded from NPM a lot.
+Several useful, common helper functions are defined, downloaded, and used a lot.
+We should standardize at least some of them.
+This proposal is seeking Committee consensus for Stage 1:
+that standardizing at least some Function helpers is “worth investigating”.
+It is not seeking to standardize every imaginable helper function:
+just a selected few frequently used functions.
+Choosing which functions to standardize would be bikeshedding for Stage 2.
+Alternatively, the Committee could request that this proposal
+be split up into multiple proposals.
 
 These convenience functions are simple,
 and they can be reimplemented easily in userspace.
@@ -29,6 +36,14 @@ So why standardize them? Because:
    There would be one standard name for each of these functions,
    rather than various names from various libraries
    that refer to the same thing.
+
+Unlike new syntax, standardized helper functions are relatively lightweight ways
+to improve the experience of all developers.
+These helper functions are well-trodden cowpaths,
+each of which deserves consideration for standardization.
+
+The following functions are only possibilities.
+Choosing which functions to standardize would be bikeshedding for Stage 2.
 
 ## Function.flow
 The `Function.flow` static method creates a new function by combining several callbacks.
