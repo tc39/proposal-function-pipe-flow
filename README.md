@@ -390,6 +390,78 @@ Precedents include:
 
 ## Function.tap
 The `Function.tap` static method creates a new unary function
+## Function.noop
+
+The `Function.noop` static method always returns undefined.
+`Function.noop` is equivalent to `() => {}`.
+It is also equivalent to `constant()`.
+
+This function is already available and frequently used from both [jQuery][] and Lodash, generally to fill a required callback argument or to disable a callback property.
+
+```js
+const { noop } = Function;
+[ 0, 1 ].map(noop)
+// [ undefined, undefined ]
+```
+
+The following real-world examples originally used
+jQuery’s [`$.noop`][] or [lodash.noop][].
+
+```js
+// From Wordpress v5.1.11:
+{ /* … */
+  defaultExpandedArguments: {
+    duration: 'fast',
+    completeCallback: noop }
+  /* … */ }
+
+// From three@0.133.1/test/benchmark/benchmark.js:
+SuiteUI.prototype.run = function() {
+  this.runButton.click = noop;
+  this.runButton.innerText = "Running..."
+  this.suite.run({ async: true });
+}
+
+// From typeahead.js@0.11.1/src/typeahead/dataset.js
+this.cancel = function cancel() {
+  canceled = true;
+  that.cancel = noop;
+  that.async &&
+    that.trigger('asyncCanceled', query);
+};
+
+// From typeahead.js@0.11.1/src/bloodhound/bloodhound.js
+// “if max size is less than 0, provide a noop cache”
+sync = sync || noop;
+async = async || noop;
+sync(this.remote ? local.slice() : local);
+
+// From typeahead.js@0.11.1/src/bloodhound/lru_cache.js
+// “if max size is less than 0, provide a noop cache”
+if (this.maxSize <= 0) {
+    this.set = this.get = $.noop;
+}
+
+// From verdaccio@5.1.6/packages/middleware/src/middleware.ts
+errorReportingMiddleware(req, res, noop);
+
+// From Odoo v15.0 addons/bus/static/src/js/services/bus_service.js
+Promise.resolve(this._audio.play()).catch(noop);
+
+// From ClickHouse v21.10.2.15-stable website/js/docsearch.js
+if (this.$hint.length === 0) {
+  this.setHint = this.getHint = this.clearHint = this.clearHintIfInvalid = noop;
+}
+```
+
+Precedents include:
+* [jQuery][]: [`$.noop`][]
+* [lodash][]: [lodash.noop][] is individually downloaded from NPM
+  about [415,600 times weekly][lodash.noop]
+
+[`$.noop`]: https://www.npmjs.com/package/lodash.noop
+[lodash.noop]: https://www.npmjs.com/package/lodash.noop
+
 that applies some callback to its argument before returning the original argument.
 
 ```js
@@ -435,5 +507,6 @@ Precedents include:
 [RxJS]: https://rxjs.dev
 [fp-ts]: https://gcanti.github.io/fp-ts/
 [Ramda]: https://ramdajs.com/
+[jQuery]: https://jquery.com/
 
 [pipe history]: https://github.com/tc39/proposal-pipeline-operator/blob/main/HISTORY.md
