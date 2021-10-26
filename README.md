@@ -611,9 +611,8 @@ that calls the original function, supplying its first argument
 as the original function’s `this` receiver,
 and supplying the rest of its arguments as the original function’s ordinary arguments.
 
-This is useful for converting functions
-that rely on the dynamic this binding into functions
-that only use their arguments.
+This is useful for converting `this`-based functions
+into non-`this`-based functions.
 
 ```js
 fn.unThis();
@@ -622,11 +621,14 @@ const $slice = Array.prototype.slice.unThis();
 $slice([ 0, 1, 2 ], 1); // [ 1, 2 ].
 ```
 
-This is not a substitute for a bind-this syntax,
+This is not a substitute for a [bind-this syntax][],
 which allows developers to change the receiver of functions
 without creating a wrapper function.
 
-`fn.unThis()` is equivalent to
+[bind-this syntax]: https://github.com/js-choi/proposal-bind-this
+
+`fn.unThis()` is equivalent to\
+`Function.prototype.call.bind(fn)` and to\
 `Function.prototype.bind.bind(Function.prototype.call)(fn)`.
 
 Therefore, `fn.unThis()(thisArg, ...restArgs)` is equivalent
