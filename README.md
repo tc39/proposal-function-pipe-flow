@@ -66,7 +66,7 @@ h(5, 7); // 5.
 The following real-world examples originally used [lodash.flow][].
 
 ```js
-// From gatsby@3.14.3/packages/gatsby-plugin-sharp/src/plugin-options.js
+// From gatsby@3.14.3/packages/gatsby-plugin-sharp/src/plugin-options.js:
 flow(
   mapUserLinkHeaders(pluginData),
   applySecurityHeaders(pluginOptions),
@@ -78,10 +78,10 @@ flow(
 )
 
 // From strapi@3.6.8
-// packages/strapi-admin/services/permission/permissions-manager/query-builers.js
+// packages/strapi-admin/services/permission/permissions-manager/query-builers.js:
 const transform = flow(flattenDeep, cleanupUnwantedProperties);
 
-// From semantic-ui-react@v2.0.4/docs/static/utils/getInfoForSeeTags.js
+// From semantic-ui-react@v2.0.4/docs/static/utils/getInfoForSeeTags.js:
 const getInfoForSeeTags = flow(
   _.get('docblock.tags'),
   _.filter((tag) => tag.title === 'see'),
@@ -169,7 +169,7 @@ pipe();
 The following real-world examples originally used [fp-ts][]’s `pipe` function.
 
 ```js
-// From @gripeless/pico@1.0.1/source/inline.ts
+// From @gripeless/pico@1.0.1/source/inline.ts:
 return pipe(
   download(absoluteURL),
   mapRej(downloadErrorToDetailedError),
@@ -178,7 +178,7 @@ return pipe(
   mapFluture(dataURL => `url(${dataURL})`)
 )
 
-// From StoplightIO Prism v4.5.0 packages/http/src/validator/validators/body.ts
+// From StoplightIO Prism v4.5.0 packages/http/src/validator/validators/body.ts:
 return pipe(
   specs,
   A.findFirst(spec => !!typeIs(mediaType, [spec.mediaType])),
@@ -285,16 +285,16 @@ g(11, 0, 3); // undefined.
 The following real-world examples originally used [lodash.constant][].
 
 ```js
-// From cypress@8.6.0/packages/net-stubbing/lib/server/util.ts
+// From cypress@8.6.0/packages/net-stubbing/lib/server/util.ts:
 setDefaultHeader('access-control-expose-headers', constant('*'))
 
-// From cypress@8.6.0/packages/driver/src/cypress/utils.ts
+// From cypress@8.6.0/packages/driver/src/cypress/utils.ts:
 return [fn, constant(type)]
 
-// From Odoo v15.0 addons/pad/static/src/js/pad.js
+// From Odoo v15.0 addons/pad/static/src/js/pad.js:
 url.toJSON = constant(this.url);
 
-// From ng-table@3.0.1/test/specs/settings.spec.ts
+// From ng-table@3.0.1/test/specs/settings.spec.ts:
 const newSettings: = {
   filterOptions: _.mapValues(allSettings.filterOptions, constant(undefined)),
   dataOptions: _.mapValues(allSettings.dataOptions, constant(undefined)),
@@ -302,7 +302,7 @@ const newSettings: = {
 };
 
 // From Elastic Kibana v7.15.1
-// src/plugins/vis_types/vislib/public/fixtures/mock_data/histogram/_slices.js
+// src/plugins/vis_types/vislib/public/fixtures/mock_data/histogram/_slices.js.
 {
   name: 0,
   size: 378611,
@@ -318,7 +318,7 @@ const newSettings: = {
   /* … */
 },
 
-// From Yhat Rodeo v2.5.2 src/node/services/files.test.js
+// From Yhat Rodeo v2.5.2 src/node/services/files.test.js:
 fs.lstat.onCall(0).yields(null, {isDirectory: constant(true)});
 ```
 
@@ -346,9 +346,9 @@ identity(); // undefined.
 The following real-world examples originally used [lodash.identity][].
 
 ```js
-// From cypress@8.6.0/packages/driver/src/cypress/runner.ts
-// “iterates over a suite's tests (including nested suites)
-// and will return as soon as the callback is true”
+// From cypress@8.6.0/packages/driver/src/cypress/runner.ts:
+// “Iterates over a suite's tests (including nested suites)
+// and will return as soon as the callback is true”.
 const findTestInSuite = (suite, fn = identity) => {
   for (const test of suite.tests) {
     if (fn(test)) {
@@ -357,22 +357,22 @@ const findTestInSuite = (suite, fn = identity) => {
   }
 }
 
-// From gatsby@3.14.3/packages/gatsby-plugin-sharp/src/plugin-options.js
-// “get all non falsey values”
+// From gatsby@3.14.3/packages/gatsby-plugin-sharp/src/plugin-options.js:
+// “Get all non falsey values”.
 return _.pickBy(options, identity)
 
-// From gatsby@3.14.3/packages/gatsby-plugin-gatsby-cloud/src/constants.js
+// From gatsby@3.14.3/packages/gatsby-plugin-gatsby-cloud/src/constants.js:
 export const DEFAULT_OPTIONS = {
-  // “optional transform for manipulating headers for sorting, etc”
+  // “Optional transform for manipulating headers for sorting, etc”.
   transformHeaders: identity,
   /* … */
 }
 
-// From ghost@4.19.0/core/frontend/helpers/img_url.js
-// “CASE: only make paths relative if we didn't get a request for an absolute url”
+// From ghost@4.19.0/core/frontend/helpers/img_url.js:
+// “only make paths relative if we didn't get a request for an absolute url”.
 const maybeEnsureRelativePath = !absoluteUrlRequested ? ensureRelativePath : _.identity;
 
-// From Meteor v2.5.0 tools/cordova/builder.js
+// From Meteor v2.5.0 tools/cordova/builder.js:
 const boilerplate = new Boilerplate(CORDOVA_ARCH, manifest, {
   urlMapper: identity,
   /* … */
@@ -399,7 +399,7 @@ This function is already available and frequently used from both [jQuery][] and 
 ```js
 const { noop } = Function;
 [ 0, 1 ].map(noop)
-// [ undefined, undefined ]
+// [ undefined, undefined ].
 ```
 
 The following real-world examples originally used
@@ -420,7 +420,7 @@ SuiteUI.prototype.run = function() {
   this.suite.run({ async: true });
 }
 
-// From typeahead.js@0.11.1/src/typeahead/dataset.js
+// From typeahead.js@0.11.1/src/typeahead/dataset.js:
 this.cancel = function cancel() {
   canceled = true;
   that.cancel = noop;
@@ -428,25 +428,25 @@ this.cancel = function cancel() {
     that.trigger('asyncCanceled', query);
 };
 
-// From typeahead.js@0.11.1/src/bloodhound/bloodhound.js
-// “if max size is less than 0, provide a noop cache”
+// From typeahead.js@0.11.1/src/bloodhound/bloodhound.js:
+// “if max size is less than 0, provide a noop cache”.
 sync = sync || noop;
 async = async || noop;
 sync(this.remote ? local.slice() : local);
 
-// From typeahead.js@0.11.1/src/bloodhound/lru_cache.js
-// “if max size is less than 0, provide a noop cache”
+// From typeahead.js@0.11.1/src/bloodhound/lru_cache.js:
+// “if max size is less than 0, provide a noop cache”.
 if (this.maxSize <= 0) {
     this.set = this.get = $.noop;
 }
 
-// From verdaccio@5.1.6/packages/middleware/src/middleware.ts
+// From verdaccio@5.1.6/packages/middleware/src/middleware.ts:
 errorReportingMiddleware(req, res, noop);
 
-// From Odoo v15.0 addons/bus/static/src/js/services/bus_service.js
+// From Odoo v15.0 addons/bus/static/src/js/services/bus_service.js:
 Promise.resolve(this._audio.play()).catch(noop);
 
-// From ClickHouse v21.10.2.15-stable website/js/docsearch.js
+// From ClickHouse v21.10.2.15-stable website/js/docsearch.js:
 if (this.$hint.length === 0) {
   this.setHint = this.getHint = this.clearHint = this.clearHintIfInvalid = noop;
 }
@@ -481,19 +481,19 @@ initialize();
 The following real-world example originally used [lodash.once][].
 
 ```js
-// From Meteor v2.2.1.
+// From Meteor v2.2.1:
 // “Are we running Meteor from a git checkout?”
 export const inCheckout = (function () {
   try { /* … */ } catch (e) { console.log(e); }
   return false;
 }).once();
 
-// From cypress@8.6.0.
+// From cypress@8.6.0:
 cy.on('command:retry', _.after(2, (() => {
   button.remove() /* … */
 }).once()))
 
-// From Jitsi Meet v6482.
+// From Jitsi Meet v6482:
 this._hangup = (() => {
  sendAnalytics(createToolbarEvent('hangup'));
  /* … */
@@ -580,7 +580,7 @@ const data = await Promise.resolve('intro.txt')
 The following real-world example originally used [lodash][].aside and lodash/fp’s pipe.
 
 ```js
-// From IBM/report-toolkit v0.6.1 packages/common/src/config.js
+// From IBM/report-toolkit v0.6.1 packages/common/src/config.js:
 export function filterEnabledRules(config) {
   return pipe(
     config,
@@ -619,7 +619,7 @@ that only use their arguments.
 fn.unThis();
 
 const $slice = Array.prototype.slice.unThis();
-$slice([ 0, 1, 2 ], 1); // [ 1, 2 ]
+$slice([ 0, 1, 2 ], 1); // [ 1, 2 ].
 ```
 
 This is not a substitute for a bind-this syntax,
@@ -637,13 +637,13 @@ or a manually created similar function.
 
 ```js
 // From chrome-devtools-frontend@1.0.934332
-// node_modules/array-includes/test/implementation.js
+// node_modules/array-includes/test/implementation.js.
 runTests(implementation.unThis(), t);
 
-// From string.prototype.trimstart@1.0.4/index.js
+// From string.prototype.trimstart@1.0.4/index.js:
 var bound = getPolyfill().unThis();
 
-// andreasgal/dom.js (84b7ab6) src/snapshot.js
+// From andreasgal/dom.js (84b7ab6) src/snapshot.js.
 const /* … */
   join = A.join || Array.prototype.join.unThis(),
   map = A.map || Array.prototype.map.unThis(),
