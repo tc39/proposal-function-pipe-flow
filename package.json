@@ -1,17 +1,8 @@
 {
   "private": true,
-  "name": "proposal-function-helpers",
-  "description": "Draft specification for several Function helpers in JavaScript.",
+  "name": "proposal-function-pipe-flow",
+  "description": "Draft specification for standard Function.pipe and Function.flow functions in JavaScript.",
   "author": "J. S. Choi <jschoi@jschoi.org> (https://jschoi.org/)",
   "license": "BSD-3-Clause",
-  "repository": "github:js-choi/proposal-function-helpers",
-  "scripts": {
-    "prespec": "mkdir -p out/",
-    "spec": "ecmarkup spec.html out/index.html --assets inline --contributors \"J. S. Choi, Ecma International\" --copyright true --title \"ES Function helpers (2021)\" --status \"proposal\" --stage 0",
-    "prewatch": "npm run prespec",
-    "watch": "npm run spec -- --watch"
-  },
-  "devDependencies": {
-    "ecmarkup": "^8.0.1"
-  }
+  "repository": "github:js-choi/proposal-function-pipe-flow"
 }

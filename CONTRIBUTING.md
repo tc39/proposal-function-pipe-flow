@@ -27,18 +27,20 @@ before making new issues or comments:
    then please [search the GitHub repository’s issues][issues]
    to see if any issues match the topic you had in mind.
    This proposal is more than four years old,
-   and it is likely that the topic has already been raised and thoroughly discussed.
+   and it is likely that the topic has already been raised and thoroughly
+   discussed.
 
-You can leave a comment on an [existing GitHub issue][issues],
-create a new issue (but really do try to [find an existing GitHub issue][issues] first),
-or [participate on Matrix][TC39 Matrix guide].
+You can leave a comment on an [existing GitHub issue][issues], create a new
+issue (but really do try to [find an existing GitHub issue][issues] first), or
+[participate on Matrix][TC39 Matrix guide].
 
 Please try to keep any existing GitHub issues on their original topic.
 
-If you feel that someone’s conduct is not meeting the [TC39 Code of Conduct][CoC],
-whether in this GitHub repository or in a [TC39 Matrix room][TC39 Matrix guide],
-then please follow the [Code of Conduct][CoC]’s directions for reporting the violation,
-including emailing [tc39-conduct-reports@googlegroups.com][].
+If you feel that someone’s conduct is not meeting the [TC39 Code of
+Conduct][CoC], whether in this GitHub repository or in a [TC39 Matrix room][TC39
+Matrix guide], then please follow the [Code of Conduct][CoC]’s directions for
+reporting the violation, including emailing
+[tc39-conduct-reports@googlegroups.com][].
 
 Thank you again for taking the time to contribute!
 
