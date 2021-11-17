@@ -244,7 +244,7 @@ Function.flowAsync(...fns);
 
 const { flowAsync } = Function;
 
-// async (...args) => await f2(await f1(await f0(...args))).
+// (...args) => Promise.resolve(x).then(f0).then(f1).then(f2).
 flowAsync(f0, f1, f2);
 
 const f = flowAsync(f0, f1, f2);
