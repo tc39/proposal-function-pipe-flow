@@ -223,7 +223,7 @@ The leftmost callback may have any arity,
 but any subsequent callbacks are expected to be unary.
 
 If `Function.flow` receives no arguments, then, by default,
-it will return `Function.identity` (which is defined later in this proposal).
+it will return a unary identity function.
 
 Precedents include:
 * [lodash][]: [lodash.flow][] is individually downloaded from NPM
