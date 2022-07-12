@@ -81,6 +81,81 @@ as soon as possible.
 
 </details>
 
+## Solutions
+We could add various combinations of the following static functions:
+
+* `Function.pipe` and `Function.pipeAsync` (for serial application).
+* `Function.flow` and Function.flowAsync (for LTR serial composition).
+* `Function.compose` and `Function.composeAsync` (for RTL serial composition).
+
+(LTR = left to right. RTL = right to left.)
+
+<details>
+
+<summary>There are eight possible combinations of `pipe`, `flow`, and `compose`.</summary>
+
+* Choice #0: **Status quo**
+* Choice #1: LTR **flow**
+
+  ```js
+  Function.flow(f, g, h);
+  Function.flowAsync(f, g, h);
+  ```
+
+* Choice #2: RTL **compose**
+
+  ```js
+  Function.compose(h, g, f);
+  Function.composeAsync(h, g, f);
+  ```
+
+* Choice #3: LTR **flow** & RTL **compose**
+
+  ```js
+  Function.flow(f, g, h);
+  Function.flowAsync(f, g, h);
+  Function.compose(h, g, f);
+  Function.composeAsync(h, g, f);
+  ```
+
+* Choice #4: **Pipe**
+
+  ```js
+  Function.pipe(x, f, g, h);
+  Function.pipeAsync(x, f, g, h);
+  ```
+
+* Choice #5: **Pipe** & LTR **flow**
+
+  ```js
+  Function.pipe(x, f, g, h);
+  Function.pipeAsync(x, f, g, h);
+  Function.flow(f, g, h);
+  Function.flowAsync(f, g, h);
+  ```
+
+* Choice #6: **Pipe** & RTL **compose**
+
+  ```js
+  Function.pipe(x, f, g, h);
+  Function.pipeAsync(x, f, g, h);
+  Function.compose(h, g, f);
+  Function.composeAsync(h, g, f);
+  ```
+
+* Choice #7: **Pipe**, LTR **flow** & RTL **compose**
+
+  ```js
+  Function.pipe(x, f, g, h);
+  Function.pipeAsync(x, f, g, h);
+  Function.flow(f, g, h);
+  Function.flowAsync(f, g, h);
+  Function.compose(h, g, f);
+  Function.composeAsync(h, g, f);
+  ```
+
+</details>
+
 ## Function.pipe
 The `Function.pipe` static method applies a sequence
 of callbacks to a given input value, returning the final callback’s result.
