@@ -245,8 +245,9 @@ then it will return `Promise.resolve(input)` by default.\
 If `Function.pipeAsync` receives no arguments,
 then it will return `Promise.resolve(undefined)`.
 
-## Function.flow
-The `Function.flow` static method creates a new function by combining several callbacks.
+## (LTR) Function.flow
+The `Function.flow` static method creates a new function by combining
+several callbacks in left-to-right order.
 
 ```js
 Function.flow(...fns);
@@ -292,7 +293,6 @@ const getInfoForSeeTags = flow(
 Any function created by `Function.flow`
 applies its own arguments to its leftmost callback.
 Then that result is applied to its next callback.
-In other words, function composition occurs from left to right.
 
 The leftmost callback may have any arity,
 but any subsequent callbacks are expected to be unary.
@@ -309,9 +309,9 @@ Precedents include:
 
 [lodash.flow]: https://www.npmjs.com/package/lodash.flow
 
-## Function.flowAsync
+## (LTR) Function.flowAsync
 The `Function.flowAsync` static method creates a new function
-by combining several potentially async callbacks;
+by combining several potentially async callbacks in left-to-right order;
 the created function will always return a promise.
 
 ```js
@@ -335,7 +335,6 @@ await h(5, 7); // await 5.
 Any function created by `Function.flowAsync`
 applies its own arguments to its leftmost callback.
 Then that result is `await`ed before being applied to its next callback.
-In other words, async function composition occurs from left to right.
 
 The leftmost callback may have any arity,
 but any subsequent callbacks are expected to be unary.
@@ -343,8 +342,68 @@ but any subsequent callbacks are expected to be unary.
 If `Function.flowAsync` receives no arguments, then, by default,
 it will return `Promise.resolve`.
 
-The name “flow” comes from lodash.flow.
-(The name compose would be confusing with other languages’ RTL function composition.)
+## (RTL) Function.compose
+The `Function.compose` static method creates a new function by combining
+several callbacks in right-to-left order.
+
+```js
+Function.compose(...fns);
+
+const { compose } = Function;
+
+const f = compose(f2, f1, f0);
+f(5, 7); // f2(f1(f0(5, 7))).
+
+const g = compose(g0);
+g(5, 7); // g0(5, 7).
+
+const h = compose();
+h(5, 7); // 5.
+```
+
+Any function created by `Function.compose`
+applies its own arguments to its rightmost callback.
+Then that result is applied to its next callback.
+
+The rightmost callback may have any arity,
+but any subsequent callbacks are expected to be unary.
+
+If `Function.compose` receives no arguments, then, by default,
+it will return a unary identity function.
+
+## (RTL) Function.composeAsync
+The `Function.composeAsync` static method creates a new function
+by combining several potentially async callbacks in right-to-left order;
+the created function will always return a promise.
+
+```js
+Function.composeAsync(...fns);
+
+const { composeAsync } = Function;
+
+// async (...args) => await f2(await f1(await f0(...args))).
+composeAsync(f0, f1, f2);
+
+const f = composeAsync(f0, f1, f2);
+await f(5, 7); // await f2(await f1(await f0(5, 7))).
+
+const g = composeAsync(g0);
+await g(5, 7); // await g0(5, 7).
+
+const h = composeAsync();
+await h(5, 7); // await 5.
+```
+
+Any function created by `Function.composeAsync`
+applies its own arguments to its rightmost callback.
+Then that result is `await`ed before being applied to its next callback.
+In other words, async function composition occurs from left to right.
+
+The rightmost callback may have any arity,
+but any subsequent callbacks are expected to be unary.
+
+If `Function.composeAsync` receives no arguments, then, by default,
+it will return `Promise.resolve`.
 
 [lodash]: https://lodash.com/docs/4.17.15
 [stdlib]: https://github.com/stdlib-js/stdlib
