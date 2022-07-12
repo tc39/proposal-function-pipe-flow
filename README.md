@@ -13,8 +13,9 @@ which are then sequentially called with some initial input—or which are compos
 into larger callbacks that will sequentially call those functions later.
 
 To do this, they tend to use one or two functions:
-**pipe** (serial function application) and **flow** (function composition).
-It would be useful to standardize these functions.
+**pipe** (serial function application), **flow** (LTR function composition),
+and/or **compose** (RTL function composition).
+It would be useful to standardize at least some of these functions.
 
 This is true even in spite of the [Hack pipe operator][pipe].
 The pipe operator is useful for generically flattening deeply nested expressions
