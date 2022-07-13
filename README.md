@@ -8,23 +8,17 @@ ECMAScript Stage-0 Proposal. J. S. Choi, 2021.
 [HISTORY.md]: https://github.com/js-choi/proposal-function-pipe-flow/blob/main/HISTORY.md
 
 Serial function application and function composition are useful and common in
-JavaScript. Developers often divide code into many smaller **unary functions**,
+JavaScript. Developers often divide code into many smaller **unary callbacks**,
 which are then sequentially called with some initial input—or which are composed
 into larger callbacks that will sequentially call those functions later.
 
-To do this, they tend to use one or two functions:
-**pipe** (serial function application), **flow** (LTR function composition),
-and/or **compose** (RTL function composition).
-It would be useful to standardize at least some of these functions.
+To do this, they often combine these callbacks with helper functions: **pipe**
+(serial function application) and **flow** and/or **compose** (function
+composition). It would be useful to standardize these metafunctions.
 
-This is true even in spite of the [Hack pipe operator][pipe].
-The pipe operator is useful for generically flattening deeply nested expressions
-into unidirectional, linear chains.
-These expressions include `await` expressions, property access,
-function calls, and arithmetic expressions.
-However, many developers frequently serially apply or compose **unary
-functions** – and, when doing so with the Hack pipe operator, they must repeat
-`(%)` at each step:
+The problem space here is the **application and composition of serial
+callbacks**. Much of the JavaScript community already has been serially
+applying or composing callbacks.
 
 From StoplightIO Prism v4.5.0 packages/http/src/validator/validators/body.ts.
 
@@ -52,35 +46,18 @@ const getInfoForSeeTags = _.flow(
 )
 ```
 
-***
+If this proposal is approved for Stage 1, then we would explore various
+directions for serially applying and composing unary callbacks. Additionally,
+we would assemble as many real-world use cases as possible and shape our design
+to fulfill them.
 
-<details>
-<summary>What happened to the F# pipe operator?</summary>
-
-***
-
-F#, Haskell, and other languages that are based on auto-curried unary functions
-have a tacit-unary-function-application operator.
-The pipe champion group has presented F# pipes for Stage 2 twice to TC39,
-being unsuccessful both times
-due to pushback from multiple other TC39 representatives’
-memory performance concerns, syntax concerns about await,
-and concerns about encouraging ecosystem bifurcation/forking.
-(For more information, see the [pipe proposal’s HISTORY.md][pipe history].)
-
-Given this reality, TC39 is much more likely to pass
-a `Function.pipe` helper function than a similar syntactic operator.
-
-Standardizing a helper function does not preclude
-standardizing an equivalent operator later.
-For example, TC39 standardized binary `**` even when `Math.pow` existed.
-
-In the future, we might try to propose a F# pipe operator,
-but we would like to try proposing `Function.pipe` first,
-in an effort to bring its benefits to the wider JavaScript community
-as soon as possible.
-
-</details>
+(This problem space is already being explored to some extent by the [pipe
+operator’s proposal][pipe]. However, unlike in this proposal, the pipe operator
+can “apply” any kind of expression operation, not only unary function calls.
+The tradeoff is that the pipe operator involves new syntax; additionally, the
+pipe function is more concise for unary function calls and can handle dynamic
+arrays of callbacks. In Stage 1, we would continue to examine cross-cutting
+concerns and overlap with the pipe operator and other “dataflow” proposals.)
 
 ## Solutions
 We could add various combinations of the following static functions:
@@ -154,6 +131,34 @@ We could add various combinations of the following static functions:
   Function.compose(h, g, f);
   Function.composeAsync(h, g, f);
   ```
+
+</details>
+
+***
+
+<details>
+<summary>What happened to the F# pipe operator?</summary>
+
+F#, Haskell, and other languages that are based on auto-curried unary functions
+have a tacit-unary-function-application operator.
+The pipe champion group has presented F# pipes for Stage 2 twice to TC39,
+being unsuccessful both times
+due to pushback from multiple other TC39 representatives’
+memory performance concerns, syntax concerns about await,
+and concerns about encouraging ecosystem bifurcation/forking.
+(For more information, see the [pipe proposal’s HISTORY.md][pipe history].)
+
+Given this reality, TC39 is much more likely to pass
+a `Function.pipe` helper function than a similar syntactic operator.
+
+Standardizing a helper function does not preclude
+standardizing an equivalent operator later.
+For example, TC39 standardized binary `**` even when `Math.pow` existed.
+
+In the future, we might try to propose a F# pipe operator,
+but we would like to try proposing `Function.pipe` first,
+in an effort to bring its benefits to the wider JavaScript community
+as soon as possible.
 
 </details>
 
