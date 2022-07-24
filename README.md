@@ -388,9 +388,9 @@ Function.composeAsync(...fns);
 const { composeAsync } = Function;
 
 // async (...args) => await f2(await f1(await f0(...args))).
-composeAsync(f0, f1, f2);
+composeAsync(f2, f1, f0);
 
-const f = composeAsync(f0, f1, f2);
+const f = composeAsync(f2, f1, f0);
 await f(5, 7); // await f2(await f1(await f0(5, 7))).
 
 const g = composeAsync(g0);
