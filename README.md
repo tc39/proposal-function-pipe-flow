@@ -280,7 +280,7 @@ flow(
   applyCachingHeaders(pluginData, pluginOptions),
   mapUserLinkAllPageHeaders(pluginData, pluginOptions),
   applyLinkHeaders(pluginData, pluginOptions),
-  applyTransfromHeaders(pluginOptions),
+  applyTransformHeaders(pluginOptions),
   saveHeaders(pluginData)
 )
 
