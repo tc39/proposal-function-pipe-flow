@@ -26,6 +26,9 @@ These include Function.pipe, pipeAsync, flow, and flowAsync.
 plenary][2021-10] for Stage 1. The Committee rejects the proposal due to its
 being overly broad and requests that it be split up into multiple proposals.
 
+## 2022-07
+[In the plenary on July 21, proposal-function-pipe-flow was formally presented to the Committee, and it was rejected for Stage 1][2022-07 plenary]. The Committee generally found its use cases not compelling enough compared to the pipe operator. Its champion subsequently withdrew it from consideration. (Eventually, after the pipe operator gains users, pain points with the pipe operator may be enough motivation to revive proposal-function-pipe-flow, but that would not occur for a long time.)
+
 [TC39 process]: https://tc39.es/process-document/
 [CONTRIBUTING.md]:
 https://github.com/tc39/proposal-pipeline-operator/blob/main/CONTRIBUTING.md
@@ -41,3 +44,4 @@ https://github.com/tc39-transfer/proposal-function-helpers
 [2021-10]:
 https://github.com/tc39-transfer/proposal-function-helpers/issues/17#issuecomment-953814353
 
+[2022-07 plenary]: https://github.com/tc39/notes/blob/main/meetings/2022-07/jul-21.md#functionpipe--flow-for-stage-1
