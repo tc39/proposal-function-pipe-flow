@@ -1,7 +1,13 @@
 # Function.pipe and flow for JavaScript
 ECMAScript Stage-0 Proposal (**withdrawn**). J. S. Choi, 2021.
 
-**⚠️ This proposal is withdrawn. [In the plenary on July 21, proposal-function-pipe-flow was formally presented to the Committee, and it was rejected for Stage 1][2022-07 plenary]. The Committee generally found its use cases not compelling enough compared to the [pipe operator][]. Its champion subsequently withdrew it from consideration. (Eventually, after the pipe operator gains users, pain points with the pipe operator may be enough motivation to revive this proposal, but that would not occur for a long time.)**
+**⚠️ This proposal is withdrawn.** [In the plenary on July 21, proposal-function-pipe-flow was formally presented to the Committee, and it was rejected for Stage 1][2022-07 plenary]. The Committee generally found its use cases either easily solved by **userland functions**, such as:
+```js
+function pipe (input, ...fnArray) {
+  return fnArray.reduce((value, fn) => fn(value), input);
+}
+```
+…or also solved by the [pipe operator][]. Its champion subsequently withdrew it from consideration. (Eventually, after the pipe operator gains users, pain points with the pipe operator may be enough motivation to revive this proposal, but that would not occur for a long time.)
 
 [2022-07 plenary]: https://github.com/tc39/notes/blob/main/meetings/2022-07/jul-21.md#functionpipe--flow-for-stage-1
 [pipe operator]: https://github.com/tc39/proposal-pipeline-operator
@@ -9,6 +15,10 @@ ECMAScript Stage-0 Proposal (**withdrawn**). J. S. Choi, 2021.
 * [Proposal history][HISTORY.md]
 
 [HISTORY.md]: https://github.com/js-choi/proposal-function-pipe-flow/blob/main/HISTORY.md
+
+<details>
+
+<summary>Original proposal</summary>
 
 Serial function application and function composition are useful and common in
 JavaScript. Developers often divide code into many smaller **unary callbacks**,
@@ -422,3 +432,5 @@ it will return `Promise.resolve`.
 
 [pipe]: https://github.com/tc39/proposal-pipeline-operator
 [pipe history]: https://github.com/tc39/proposal-pipeline-operator/blob/main/HISTORY.md
+
+</details>
